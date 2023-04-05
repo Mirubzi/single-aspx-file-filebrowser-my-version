@@ -11,3 +11,34 @@ Comes with some configurable options like:
 - Easily changable texts to your own language.
 - Specify which files are allowed and which folders are blocked.
 
+### Options
+
+<code>BrowseSubFolders</code>
+Allows the browsing of subfolders.
+*Default: True*
+
+<code>ShowBreadCrumbs</code>
+Show the Breadcrumb path above the file table.
+*Default: True*
+
+<code>ShowFooter</code>
+Show the footer with a summary of size and number of files.
+*Default: True*
+
+<code>ShowSizeInMb</code>
+Shows the size of files in MB instead of KB.
+*Default: False*
+
+<code>UseDataTables</code>
+Use DataTable for column sorting, searching and more.
+*Default: True*
+
+<code>UseDataTablesSearch</code>
+Enables easy searching of items in the file table.
+*Default: True*
+
+<code>AllowedFileTypes</code>
+Edit this list to add or remove allowed file types to be shown in the file table.	
+
+<code>BlockedFolders</code>
+Edit this list to add or remove folders from the blocked list.
