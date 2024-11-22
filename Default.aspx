@@ -7,16 +7,16 @@
     bool BrowseSubFolders = true;
     bool ShowBreadCrumbs = true;
     bool ShowFooter = true;
-    bool ShowSizeInMb = false;
+    bool ShowSizeInMb = true;
     bool UseDataTables = true;
     bool UseDataTablesSearch = true;
 
     //localizable texts
-    string TxtColumnFileName = "FileName";
+    string TxtColumnFileName = "File name";
     string TxtColumnDate = "Date";
     string TxtColumnType = "Type";
     string TxtColumnSize = "Size";
-    string TxtFolderUp = ". . .";
+    string TxtFolderUp = "...";
     string TxtRoot = "root";
     string TxtCurrentFolder = "Current folder";
     string TxtFooter = "{0:N0} files found with a total size of {1:N1} {2}.";
@@ -158,15 +158,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>VDWWD FileBrowser - <%= CurrentFolder %></title>
+    <title>Nya <%= CurrentFolder %></title>
 </head>
 <body>
-
-    <!-- van der Waal Webdesign -->
-    <!-- https://www.vanderwaal.eu -->
 
     <div class="container mt-3 mb-3">
 
@@ -229,210 +226,203 @@
                 {
             %>
 
-            <div class="col-12 col-md-3 col-xl-2">
-                <input type="search" placeholder="<%= TxtDatatableSearch %>" maxlength="50" class="form-control form-control-sm search-datatable">
-            </div>
+            
 
             <% } %>
         </div>
 
+        
+
         <% } %>
 
-        <div class="row">
-            <div class="col">
+        <div class="center">
+            
+            <div class="col-12 col-md-3 searchbar col-xl-2">
+                <input type="search" placeholder="<%= TxtDatatableSearch %>" maxlength="50" class="form-control form-control-sm search-datatable">
+            </div>
+            <div class="row">
+                <div class="col">
 
-                <!-- the table with all the files -->
+                    <!-- the table with all the files -->
 
-                <table class="table table-striped table-datatable <%= UseDataTables ? "opacity-0" : "" %>" id="vdwwd_datatable_<%= Regex.Replace(CurrentFolder, "[^a-zA-Z0-9]", "") %>">
-                    <thead>
-                        <tr>
-                            <% if (UseDataTables)
-                                { %>
+                    <table class="table table-striped table-datatable <%= UseDataTables ? "opacity-0" : "" %>" id="vdwwd_datatable_<%= Regex.Replace(CurrentFolder, "[^a-zA-Z0-9]", "") %>">
+                        <thead>
+                            <tr>
+                                <% if (UseDataTables)
+                                    { %>
 
-                            <th class="d-none"></th>
+                                <th class="d-none"></th>
 
-                            <% } %>
+                                <% } %>
 
-                            <th class="w-75"><%= TxtColumnFileName %>&nbsp;</th>
-                            <th class="text-end"><%= TxtColumnDate %>&nbsp;</th>
-                            <th class="text-end"><%= TxtColumnType %>&nbsp;</th>
-                            <th class="text-end"><%= TxtColumnSize %>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                                <th class="w-75"><%= TxtColumnFileName %>&nbsp;</th>
+                                <th class="text-end"><%= TxtColumnDate %>&nbsp;</th>
+                                <th class="text-end"><%= TxtColumnType %>&nbsp;</th>
+                                <th class="text-end"><%= TxtColumnSize %>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        <!-- loop all the folders -->
+                            <!-- loop all the folders -->
 
-                        <% if (BrowseSubFolders)
-                            {
-                                if (!string.IsNullOrEmpty(CurrentFolder))
+                            <% if (BrowseSubFolders)
                                 {
-                        %>
+                                    if (!string.IsNullOrEmpty(CurrentFolder))
+                                    {
+                            %>
 
-                        <!-- add the up folder link if not root -->
+                            <!-- add the up folder link if not root -->
 
-                        <% if (IsSubFolder)
-                            { %>
-
-                        <tr>
-
-                            <% if (UseDataTables)
+                            <% if (IsSubFolder)
                                 { %>
 
-                            <td class="d-none">0</td>
+                            <tr>
 
-                            <% } %>
+                                <% if (UseDataTables)
+                                    { %>
 
-                            <td>
-                                <div class="float-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-3">
-                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-                                        <line x1="9" y1="14" x2="15" y2="14"></line>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold">
-                                    <a href="<%= RootFolderNav %>?folder=<%= ParentFolder %>" class="text-decoration-none">
-                                        <%= TxtFolderUp %>
-                                    </a>
-                                </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                                <td class="d-none">0</td>
 
-                        <% } %>
+                                <% } %>
 
-                        <!-- loop the folders -->
-
-                        <%
-                            }
-
-                            foreach (var Folder in AllFolders)
-                            { %>
-
-                        <tr>
-
-                            <% if (UseDataTables)
-                                { %>
-
-                            <td class="d-none">1</td>
-
-                            <% } %>
-
-                            <td>
-                                <div class="float-start">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-3">
-                                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-                                    </svg>
-                                </div>
-                                <div class="fw-bold">
-                                    <a href="<%= RootFolderNav %>?folder=<%= (IsSubFolder ? CurrentFolder + "/" : CurrentFolder) + Folder.Name.Replace(" ", "%20") %>" class="text-decoration-none">
-                                        <%= Folder.Name %>
-                                    </a>
-                                </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-
-                        <% }
-                            } %>
-
-                        <!-- loop all the files -->
-
-                        <% foreach (var File in AllFiles)
-                            { %>
-
-                        <tr>
-
-                            <% if (UseDataTables)
-                                { %>
-
-                            <td class="d-none">2</td>
-
-                            <% } %>
-
-                            <td>
-                                <a target="_blank" class="text-decoration-none" href="<%: DownloadLinkPrefix + File.Name %>">
-                                    <div>
-                                        <%= File.Name %>
+                                <td>
+                                    <div class="float-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-3">
+                                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                            <line x1="9" y1="14" x2="15" y2="14"></line>
+                                        </svg>
                                     </div>
-                                </a>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <%= File.CreationTime.ToShortDateString() %>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <%= File.Extension.Replace(".", "").ToUpper() %>
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <span class="d-none"><%: File.Length.ToString().PadLeft(15, '0') %></span>
-                                <%= string.Format("{0:N1}", (decimal)File.Length / SizeDivider) %>
-                            </td>
-                        </tr>
-
-                        <% } %>
-
-                        <!-- if there are no files show error message -->
-
-                        <% if (!AllFiles.Any())
-                            { %>
-
-                        <tr>
-                            <% if (UseDataTables)
-                                { %>
-
-                            <td class="d-none">1</td>
+                                    <div class="fw-bold">
+                                        <a href="<%= RootFolderNav %>?folder=<%= ParentFolder %>" class="text-decoration-none">
+                                            <%= TxtFolderUp %>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
                             <% } %>
 
-                            <td class="dataTables_empty">
-                                <%= TxtDatatableEmpty %>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                            <!-- loop the folders -->
+
+                            <%
+                                }
+
+                                foreach (var Folder in AllFolders)
+                                { %>
+
+                            <tr>
+
+                                <% if (UseDataTables)
+                                    { %>
+
+                                <td class="d-none">1</td>
+
+                                <% } %>
+
+                                <td>
+                                    <div class="float-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-3">
+                                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="fw-bold">
+                                        <a href="<%= RootFolderNav %>?folder=<%= (IsSubFolder ? CurrentFolder + "/" : CurrentFolder) + Folder.Name.Replace(" ", "%20") %>" class="text-decoration-none">
+                                            <%= Folder.Name %>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <% }
+                                } %>
+
+                            <!-- loop all the files -->
+
+                            <% foreach (var File in AllFiles)
+                                { %>
+
+                            <tr>
+
+                                <% if (UseDataTables)
+                                    { %>
+
+                                <td class="d-none">2</td>
+
+                                <% } %>
+
+                                <td>
+                                    <a target="_blank" class="text-decoration-none" href="<%: DownloadLinkPrefix + File.Name %>">
+                                        <div>
+                                            <%= File.Name %>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="text-end text-nowrap">
+                                    <%= File.CreationTime.ToShortDateString() %>
+                                </td>
+                                <td class="text-end text-nowrap">
+                                    <%= File.Extension.Replace(".", "").ToUpper() %>
+                                </td>
+                                <td class="text-end text-nowrap">
+                                    <span class="d-none"><%: File.Length.ToString().PadLeft(15, '0') %></span>
+                                    <%= string.Format("{0:N1}", (decimal)File.Length / SizeDivider) %>
+                                </td>
+                            </tr>
+
+                            <% } %>
+
+                            <!-- if there are no files show error message -->
+
+                            <% if (!AllFiles.Any())
+                                { %>
+
+                            <tr>
+                                <% if (UseDataTables)
+                                    { %>
+
+                                <td class="d-none">1</td>
+
+                                <% } %>
+
+                                <td class="dataTables_empty">
+                                    <%= TxtDatatableEmpty %>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <% } %>
+                        </tbody>
+
+                        <!-- show the footer -->
+
+                        <% if (ShowFooter)
+                            { %>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="fw-bold">
+                                    <%= string.Format(TxtFooter, AllFiles.Count(), (decimal)AllFiles.Sum(x => x.Length) / SizeDivider, ShowSizeInMb ? TxtSizeMb : TxtSizeKb) %>
+                                </td>
+                            </tr>
+                        </tfoot>
 
                         <% } %>
-                    </tbody>
+                    </table>
 
-                    <!-- show the footer -->
-
-                    <% if (ShowFooter)
-                        { %>
-
-                    <tfoot>
-                        <tr>
-                            <td colspan="5" class="fw-bold">
-                                <%= string.Format(TxtFooter, AllFiles.Count(), (decimal)AllFiles.Sum(x => x.Length) / SizeDivider, ShowSizeInMb ? TxtSizeMb : TxtSizeKb) %>
-                            </td>
-                        </tr>
-                    </tfoot>
-
-                    <% } %>
-                </table>
-
+                </div>
             </div>
         </div>
 
     </div>
 
-    <div class="container">
-        
-        <div class="row">
-            <div class="col text-center pt-4">
-
-                <a target="_blank" href="https://www.vanderwaal.eu">
-                    <img src="https://www.vanderwaal.eu/images/vdwwd.png" alt="van der Waal Webdesign" title="van der Waal Webdesign" width="20%" />
-                </a>
-
-            </div>
-        </div>
-
-    </div>
 
     <% if (UseDataTables)
         { %>
@@ -467,6 +457,88 @@
             color: black;
             padding: 0px 2px;
         }
+
+        a {
+            color: rgb(255, 123, 0);
+
+        }
+
+        a:hover {
+            color: rgb(196, 105, 0);
+        }
+
+        body{
+            background-image: url(../img/13-Ventura-Dark.jpg);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+
+        }
+
+
+        table.table-striped tbody .text-end.text-nowrap, .table-striped .text-end.sorting, .fw-bold, .w-75.sorting, .even, .odd {
+            color: rgb(204, 204, 204);
+            border-color: rgba(119, 119, 119, 0);
+        
+        }
+
+        .form-control {
+            background-color: rgba(56, 48, 65, 0.377);  
+            border-color: rgba(71, 71, 71, 0.733);
+            border-radius: 12.25px;
+        }
+
+        .dataTable{
+            background-color: rgba(0, 0, 0, 0.377);
+            border-radius: 13.5px;
+            backdrop-filter: blur(8px);
+            
+        }
+
+        .float-start, .breadcrumb  {
+            color: rgba(255, 255, 255, 0.849);
+        }
+
+        table.dataTable tfoot th, table.dataTable tfoot td{
+            border-top: 0px solid rgba(97, 97, 97, 0.247);
+        }
+
+        div.center div.col-12.col-md-3.col-xl-2{
+            align-self: center;
+            display: flex;
+            box-sizing: border-box;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            align-self: center;
+            top: 50%;
+            transform: translateY(50%);
+        }
+
+        .searchbar {
+            width: 36%;
+        }
+
+        input{
+            text-align: center; }
+ 
+        .container.mt-3.mb-3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            box-sizing: border-box;
+        }    
+
+        
+        
     </style>
 
     <script>
