@@ -158,7 +158,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.5, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, device-height, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Nya <%= CurrentFolder %></title>
@@ -423,7 +423,6 @@
 
     </div>
 
-
     <% if (UseDataTables)
         { %>
 
@@ -449,7 +448,7 @@
         table.dataTable td.dataTables_empty {
             text-align: left;
             padding: 20px;
-            color: red;
+            color: rgb(255, 158, 120);
         }
 
         mark {
@@ -470,11 +469,12 @@
         body{
             background-image: url(../img/13-Ventura-Dark.jpg);
             background-size: cover;
-            display: flex;
-            justify-content: center;
             position: relative;
             flex-direction: column;
-
+            background-color: rgb(32, 20, 55);
+            background-repeat: no-repeat;
+            background-position:right top;
+            height: fit-content;
         }
 
 
@@ -482,12 +482,6 @@
             color: rgb(204, 204, 204);
             border-color: rgba(119, 119, 119, 0);
         
-        }
-
-        .form-control {
-            background-color: rgba(56, 48, 65, 0.377);  
-            border-color: rgba(71, 71, 71, 0.733);
-            border-radius: 12.25px;
         }
 
         .dataTable{
@@ -510,7 +504,7 @@
             display: flex;
             box-sizing: border-box;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .center {
@@ -518,16 +512,32 @@
             flex-direction: column;
             position: absolute;
             align-self: center;
+            justify-content: center;
+            vertical-align: middle;
             top: 50%;
-            transform: translateY(50%);
+            /* transform: translateY(50%); */
         }
 
         .searchbar {
-            width: 36%;
+            width: 50%;
+            margin-top: 18%;
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
         }
 
-        input{
-            text-align: center; }
+        input:focus.search-datatable, .search-datatable{
+            background-color: rgba(56, 48, 65, 0.377) ;  
+            border-color: rgba(71, 71, 71, 0.733) ;
+            border-radius: 1.225rem;
+            color:rgba(255, 255, 255, 0.884) ;
+        }
+
+        input.search-datatable, .search-datatable::placeholder{
+            text-align: center; 
+            height: 2.3rem;
+            color: rgba(255, 255, 255, 0.685);
+            opacity: 1; /* Firefox */
+        }
  
         .container.mt-3.mb-3 {
             display: flex;
@@ -535,6 +545,7 @@
             justify-content: center;
             position: relative;
             box-sizing: border-box;
+            vertical-align: middle;
         }    
 
         
