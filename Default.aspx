@@ -17,8 +17,8 @@
     string TxtColumnType = "Type";
     string TxtColumnSize = "Size";
     string TxtFolderUp = "...";
-    string TxtRoot = "";
-    string TxtCurrentFolder = "Folder";
+    string TxtRoot = "root";
+    string TxtCurrentFolder = "Download";
     string TxtFooter = "{0:N0} files found with a total size of {1:N1} {2}.";
     string TxtDatatableEmpty = "No files found in the current folder.";
     string TxtDatatableSearch = "Search";
@@ -160,8 +160,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, device-height, initial-scale=0.5, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Nya <%= CurrentFolder %></title>
+    <
+    <title>Download</title>
 </head>
 <body>
 
