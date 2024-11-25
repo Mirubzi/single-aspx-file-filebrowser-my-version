@@ -17,8 +17,8 @@
     string TxtColumnType = "Type";
     string TxtColumnSize = "Size";
     string TxtFolderUp = "...";
-    string TxtRoot = "root";
-    string TxtCurrentFolder = "Current folder";
+    string TxtRoot = "";
+    string TxtCurrentFolder = "Folder";
     string TxtFooter = "{0:N0} files found with a total size of {1:N1} {2}.";
     string TxtDatatableEmpty = "No files found in the current folder.";
     string TxtDatatableSearch = "Search";
@@ -38,7 +38,7 @@
         ".png",
         ".psd",
         ".svg",
-
+        ".mkv",
         ".7z",
         ".csv",
         ".doc",
@@ -158,7 +158,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, device-height, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, device-height, initial-scale=0.5, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Nya <%= CurrentFolder %></title>
@@ -448,7 +448,7 @@
         table.dataTable td.dataTables_empty {
             text-align: left;
             padding: 20px;
-            color: rgb(255, 158, 120);
+            color: rgb(255, 120, 120);
         }
 
         mark {
@@ -458,41 +458,40 @@
         }
 
         a {
-            color: rgb(255, 123, 0);
+            color: rgba(153, 245, 253, 0.801);
 
         }
 
         a:hover {
-            color: rgb(196, 105, 0);
+            color: rgb(153, 244, 253);
         }
 
         body{
-            background-image: url(../img/13-Ventura-Dark.jpg);
+            background-image: url(../img/feature-16.jpg);
             background-size: cover;
             position: relative;
             flex-direction: column;
             background-color: rgb(32, 20, 55);
-            background-repeat: no-repeat;
             background-position:right top;
             height: fit-content;
         }
 
 
         table.table-striped tbody .text-end.text-nowrap, .table-striped .text-end.sorting, .fw-bold, .w-75.sorting, .even, .odd {
-            color: rgb(204, 204, 204);
+            color: rgb(178, 253, 253);
             border-color: rgba(119, 119, 119, 0);
         
         }
 
         .dataTable{
-            background-color: rgba(0, 0, 0, 0.377);
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 13.5px;
             backdrop-filter: blur(8px);
             
         }
 
         .float-start, .breadcrumb  {
-            color: rgba(255, 255, 255, 0.849);
+            color: rgba(212, 182, 250, 0.945);
         }
 
         table.dataTable tfoot th, table.dataTable tfoot td{
@@ -527,7 +526,7 @@
 
         input:focus.search-datatable, .search-datatable{
             background-color: rgba(56, 48, 65, 0.377) ;  
-            border-color: rgba(71, 71, 71, 0.733) ;
+            border-color: rgba(95, 95, 95, 0.61) ;
             border-radius: 1.225rem;
             color:rgba(255, 255, 255, 0.884) ;
         }
@@ -535,7 +534,7 @@
         input.search-datatable, .search-datatable::placeholder{
             text-align: center; 
             height: 2.3rem;
-            color: rgba(255, 255, 255, 0.685);
+            color: rgba(178, 253, 253, 0.568);
             opacity: 1; /* Firefox */
         }
  
