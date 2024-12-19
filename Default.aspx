@@ -18,7 +18,7 @@
     string TxtColumnSize = "Size";
     string TxtFolderUp = "...";
     string TxtRoot = "root";
-    string TxtCurrentFolder = "Download";
+    string TxtCurrentFolder = "Root";
     string TxtFooter = "{0:N0} files found with a total size of {1:N1} {2}.";
     string TxtDatatableEmpty = "No files found in the current folder.";
     string TxtDatatableSearch = "Search";
@@ -60,7 +60,8 @@
     //blocked folder names
     List<string> BlockedFolders = new List<string>()
     {
-        "bin"
+        "bin",
+        "css"
     };
 
     //some variables
@@ -160,8 +161,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, device-height, initial-scale=0.5, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <
-    <title>Download</title>
+
+    <title>Nya <%= CurrentFolder %></title>
 </head>
 <body>
 
@@ -441,6 +442,17 @@
     <% } %>
 
     <style>
+
+        :root{
+            --infos: rgba(209, 177, 177, 0.788);
+            --main: rgba(255, 83, 83, 0.842);
+            --additional-for-main: rgb(255, 128, 128);
+        }
+
+        html{
+            overflow:auto;
+        }
+
         .dataTables_filter {
             display: none;
         }
@@ -448,26 +460,28 @@
         table.dataTable td.dataTables_empty {
             text-align: left;
             padding: 20px;
-            color: rgb(255, 120, 120);
+            /* color: rgb(255, 120, 120); */
+            color: var(--main);
         }
 
         mark {
-            background: orange;
+            background: rgba(255, 51, 0, 0.884);
             color: black;
             padding: 0px 2px;
         }
 
         a {
-            color: rgba(153, 245, 253, 0.801);
-
+            /* color: rgba(255, 100, 100, 0.801); */
+            color: var(--main);
         }
 
         a:hover {
-            color: rgb(153, 244, 253);
+            /* color: rgb(253, 153, 153); */
+            color: var(--additional-for-main);
         }
 
         body{
-            background-image: url(../img/feature-16.jpg);
+            background-image: url(../img/red_distortion_3.jpg);
             background-size: cover;
             position: relative;
             flex-direction: column;
@@ -478,9 +492,9 @@
 
 
         table.table-striped tbody .text-end.text-nowrap, .table-striped .text-end.sorting, .fw-bold, .w-75.sorting, .even, .odd {
-            color: rgb(178, 253, 253);
+            /* color: rgb(224, 53, 53); */
             border-color: rgba(119, 119, 119, 0);
-        
+            color: var(--infos);
         }
 
         .dataTable{
@@ -491,7 +505,8 @@
         }
 
         .float-start, .breadcrumb  {
-            color: rgba(212, 182, 250, 0.945);
+            /* color: rgba(250, 207, 182, 0.945); */
+            color: var(--infos);
         }
 
         table.dataTable tfoot th, table.dataTable tfoot td{
@@ -519,7 +534,7 @@
 
         .searchbar {
             width: 50%;
-            margin-top: 18%;
+            margin-top: 5vh;
             backdrop-filter: blur(8px);
             border-radius: 20px;
         }
@@ -534,8 +549,9 @@
         input.search-datatable, .search-datatable::placeholder{
             text-align: center; 
             height: 2.3rem;
-            color: rgba(178, 253, 253, 0.568);
+            /* color: rgba(253, 178, 178, 0.568); */
             opacity: 1; /* Firefox */
+            color: var(--infos);
         }
  
         .container.mt-3.mb-3 {
